@@ -21,3 +21,8 @@ for i in range(epochs):
         train_step(x[k], y[k])
 
 print('w: {:8.5f}   b: {:8.5f}'.format(w.numpy(), b.numpy()))
+
+f = 'x: {:8.5f} --> y: {:8.5f}'
+for k in range(len(y)):
+    y_hat = w * x[k] + b
+    print(f.format(x[k].numpy(), y_hat.numpy()))
