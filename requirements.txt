@@ -7,3 +7,5 @@ tensorflow
 seaborn
 torch
 torchvision
+transformers
+tf-keras
