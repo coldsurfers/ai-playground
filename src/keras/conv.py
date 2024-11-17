@@ -64,3 +64,25 @@ history = model.fit(
     epochs=5,
     validation_data=(test_images, test_labels)
 )
+
+def plot_loss(history):
+    plt.figure(figsize=(16, 10))
+    val = plt.plot(
+        history.epoch,
+        history.history['val_loss'],
+        '--',
+        label='Test'
+    )
+    plt.plot(
+        history.epoch,
+        history.history['loss'],
+        color=val[0].get_color(),
+        label='Train'
+    )
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+
+    plt.xlim([0, max(history.epoch)])
+
+plot_loss(history)
