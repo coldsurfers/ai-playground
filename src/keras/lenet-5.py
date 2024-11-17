@@ -84,3 +84,18 @@ model.add(Dense(120, activation='tanh'))
 model.add(Dense(84, activation='tanh'))
 model.add(RBFLayer(10, 0.5))
 
+model.compile(
+    loss='mean_squared_error',
+    optimizer=keras.optimizers.Adam(),
+    metrics=['accuracy']
+)
+model.fit(
+    x_train,
+    y_train,
+    epochs=20,
+    verbose=1,
+    validation_data=(x_test, y_test)
+)
+
+score = model.evaluate(x_test, y_test)
+print('accuracy:', score[1])
