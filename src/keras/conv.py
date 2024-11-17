@@ -29,13 +29,14 @@ for i in range(25):
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
 
-train_images = train_images / 255.0
-test_images = test_images / 255.0
+train_images = train_images.reshape(-1, 28, 28, 1) / 255.0  # Normalize and reshape
+test_images = test_images.reshape(-1, 28, 28, 1) / 255.0
 
 model = keras.Sequential([
+    keras.layers.Input(shape=(28, 28, 1)),
     keras.layers.Conv2D(
-        input_shape=(28, 28, 1),
-        kernel_size=(3, 3)
+        kernel_size=(3, 3),
+        filters=16
     ),
     keras.layers.MaxPool2D(
         strides=(2, 2)
@@ -50,3 +51,14 @@ model = keras.Sequential([
         activation=tf.nn.softmax
     )
 ])
+
+model.compile(
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
+)
+history = model.fit(
+    train_images,
+    train_labels,
+    epochs=5,
+    validation_data=(test_images, test_labels)
+)
