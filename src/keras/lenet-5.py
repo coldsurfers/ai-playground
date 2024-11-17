@@ -20,3 +20,6 @@ x_test = np.pad(
 )
 x_train = x_train / 255
 x_test = x_test / 255
+
+y_train = keras.utils.to_categorical(y_train, 10)
+y_test = keras.utils.to_categorical(y_test, 10)
