@@ -28,3 +28,25 @@ for i in range(25):
     plt.imshow(train_images[1], cmap=plt.cm.binary)
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
+
+train_images = train_images / 255.0
+test_images = test_images / 255.0
+
+model = keras.Sequential([
+    keras.layers.Conv2D(
+        input_shape=(28, 28, 1),
+        kernel_size=(3, 3)
+    ),
+    keras.layers.MaxPool2D(
+        strides=(2, 2)
+    ),
+    keras.layers.Flatten(),
+    keras.layers.Dense(
+        128,
+        activation=tf.nn.relu
+    ),
+    keras.layers.Dense(
+        10,
+        activation=tf.nn.softmax
+    )
+])
