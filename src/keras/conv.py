@@ -36,7 +36,8 @@ model = keras.Sequential([
     keras.layers.Input(shape=(28, 28, 1)),
     keras.layers.Conv2D(
         kernel_size=(3, 3),
-        filters=16
+        filters=16,
+        activation='relu'
     ),
     keras.layers.MaxPool2D(
         strides=(2, 2)
@@ -53,6 +54,7 @@ model = keras.Sequential([
 ])
 
 model.compile(
+    optimizer='rmsprop',
     loss='sparse_categorical_crossentropy',
     metrics=['accuracy']
 )
