@@ -86,3 +86,9 @@ def plot_loss(history):
     plt.xlim([0, max(history.epoch)])
 
 plot_loss(history)
+
+def evaluation_model(model):
+    test_loss, test_accuracy = model.evaluate(test_images, test_labels)
+    print('accuracy: ', test_accuracy)
+
+evaluation_model(model)
