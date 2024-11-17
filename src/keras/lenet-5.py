@@ -1,9 +1,12 @@
+import tensorflow as tf
 from tensorflow import keras
 from keras.datasets import mnist
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Layer
-from keras import backend as K
+from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Layer, Input
+from tensorflow.keras import backend as K
 import numpy as np
+
+print(tf.__version__)
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
@@ -47,3 +50,37 @@ class RBFLayer(Layer):
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.units)
+
+model = Sequential()
+model.add(
+    Input(shape=(32, 32, 1))
+)
+model.add(
+    Conv2D(
+        6,
+        kernel_size=(5, 5),
+        activation='tanh',
+    )
+)
+model.add(
+    MaxPooling2D(
+        pool_size=(2, 2)
+    )
+)
+model.add(
+    Conv2D(
+        16,
+        kernel_size=(5, 5),
+        activation='tanh'
+    )
+)
+model.add(
+    MaxPooling2D(
+        pool_size=(2, 2)
+    )
+)
+model.add(Flatten())
+model.add(Dense(120, activation='tanh'))
+model.add(Dense(84, activation='tanh'))
+model.add(RBFLayer(10, 0.5))
+
